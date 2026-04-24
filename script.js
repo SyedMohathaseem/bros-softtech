@@ -59,22 +59,30 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
   // ===== COUNTER ANIMATION =====
-  let counted = false;
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(counter => {
+      if (counter.dataset.animated) return;
+      counter.dataset.animated = 'true';
+      const target = +counter.dataset.count;
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        counter.textContent = Math.floor(current) + '+';
+      }, 16);
+    });
+  }
+
+  // Animate hero stats immediately on page load
+  animateCounters();
+
+  // Also observe the stats section for when it scrolls into view
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting && !counted) {
-        counted = true;
-        document.querySelectorAll('[data-count]').forEach(counter => {
-          const target = +counter.dataset.count;
-          const duration = 2000;
-          const step = target / (duration / 16);
-          let current = 0;
-          const timer = setInterval(() => {
-            current += step;
-            if (current >= target) { current = target; clearInterval(timer); }
-            counter.textContent = Math.floor(current) + '+';
-          }, 16);
-        });
+      if (entry.isIntersecting) {
+        animateCounters();
       }
     });
   }, { threshold: 0.5 });

@@ -93,8 +93,8 @@ button { cursor: pointer; border: none; font-family: inherit; }
 }
 .btn-outline {
   background: transparent;
-  color: var(--white);
-  border: 2px solid rgba(255,255,255,0.2);
+  color: var(--text-heading);
+  border: 2px solid rgba(26,26,46,0.2);
 }
 .btn-outline:hover {
   border-color: var(--secondary);
@@ -102,13 +102,13 @@ button { cursor: pointer; border: none; font-family: inherit; }
   transform: translateY(-2px);
 }
 .btn-dark {
-  background: var(--primary);
-  color: var(--white);
+  background: #1a1a2e;
+  color: #ffffff;
 }
 .btn-dark:hover {
-  background: var(--primary-dark);
+  background: #2d2d44;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 30px rgba(26,26,46,0.3);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -477,7 +477,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 }
 .project-overlay p {
   font-size: 0.88rem;
-  color: var(--text-body);
+  color: rgba(255,255,255,0.7);
   line-height: 1.7;
   margin-bottom: 22px;
   max-width: 280px;
@@ -588,7 +588,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 }
 .about-image-card .about-card-sub {
   font-size: 0.9rem;
-  color: var(--text-body);
+  color: rgba(255,255,255,0.55);
   margin-top: 8px;
 }
 .about-tech-stack {
@@ -600,14 +600,21 @@ button { cursor: pointer; border: none; font-family: inherit; }
 }
 .tech-badge {
   font-family: var(--font-tech);
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 8px 18px;
+  background: linear-gradient(135deg, rgba(184,134,11,0.15), rgba(212,160,23,0.08));
+  border: 1px solid rgba(184,134,11,0.3);
+  padding: 9px 20px;
   border-radius: 50px;
   font-size: 0.75rem;
-  color: #d4a017;
+  color: #f0c040;
   font-weight: 700;
   letter-spacing: 0.5px;
+  transition: var(--transition);
+}
+.tech-badge:hover {
+  background: linear-gradient(135deg, rgba(184,134,11,0.3), rgba(212,160,23,0.15));
+  border-color: rgba(240,192,64,0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(184,134,11,0.2);
 }
 
 /* ===== TEAM / DEVELOPERS ===== */
