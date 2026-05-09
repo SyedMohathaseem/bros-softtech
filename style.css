@@ -363,16 +363,50 @@ button { cursor: pointer; border: none; font-family: inherit; }
   left: 0;
   width: 100%;
   height: 4px;
-  background: linear-gradient(90deg, var(--secondary), var(--secondary-dark));
+  background: linear-gradient(90deg, var(--secondary), #d4a017, var(--secondary));
   transform: scaleX(0);
   transform-origin: left;
   transition: var(--transition);
 }
 .service-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-hover);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(184,134,11,0.12), 0 8px 24px rgba(0,0,0,0.08);
+  border-color: rgba(184,134,11,0.2);
 }
 .service-card:hover::before { transform: scaleX(1); }
+
+/* Service number label */
+.service-number {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(184,134,11,0.06);
+  line-height: 1;
+  transition: var(--transition);
+  pointer-events: none;
+}
+.service-card:hover .service-number {
+  color: rgba(184,134,11,0.12);
+  transform: scale(1.1);
+}
+
+/* Service arrow */
+.service-arrow {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: rgba(184,134,11,0.3);
+  font-weight: 700;
+  transition: var(--transition);
+  transform: translateX(0);
+}
+.service-card:hover .service-arrow {
+  color: var(--secondary);
+  transform: translateX(8px);
+}
+
 .service-icon {
   width: 56px;
   height: 56px;
@@ -389,6 +423,8 @@ button { cursor: pointer; border: none; font-family: inherit; }
 .service-card:hover .service-icon {
   background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
   color: var(--primary);
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 8px 25px rgba(184,134,11,0.3);
 }
 .service-card h3 {
   font-family: var(--font-heading);
@@ -401,6 +437,83 @@ button { cursor: pointer; border: none; font-family: inherit; }
   font-size: 0.9rem;
   color: #666;
   line-height: 1.7;
+}
+
+/* Service Reveal Animation (staggered) */
+.service-reveal {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.service-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ===== SERVICES MARQUEE ===== */
+.services-marquee {
+  background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+  padding: 28px 0;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid rgba(184,134,11,0.15);
+  border-bottom: 1px solid rgba(184,134,11,0.15);
+}
+.services-marquee::before,
+.services-marquee::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.services-marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, #1a1a2e, transparent);
+}
+.services-marquee::after {
+  right: 0;
+  background: linear-gradient(-90deg, #2d2d44, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+.marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+.marquee-item {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  padding: 0 20px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+.marquee-item:hover {
+  color: #d4a017;
+}
+.marquee-dot {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  opacity: 0.6;
+  padding: 0 8px;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 /* ===== PROJECTS ===== */

@@ -58,6 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
+  // ===== SERVICE CARD STAGGERED REVEAL =====
+  const serviceObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = parseInt(entry.target.dataset.delay || 0);
+        setTimeout(() => {
+          entry.target.classList.add('revealed');
+        }, delay * 150);
+        serviceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.service-reveal').forEach(el => serviceObserver.observe(el));
+
   // ===== COUNTER ANIMATION =====
   function animateCounters() {
     document.querySelectorAll('[data-count]').forEach(counter => {
